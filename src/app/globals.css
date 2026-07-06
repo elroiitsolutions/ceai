@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;700&display=swap');
+@import "tailwindcss";
+@source "../**/*.{js,ts,jsx,tsx,mdx}";
+
+@theme {
+  --color-gold: #C19A5B;
+  --color-dark: #18191A;
+  --color-light: #F6F5ED;
+  --color-seppa-red: #763235;
+  --color-seppa-blue: #001f5c;
+  
+  --font-sans: 'Inter', 'Noto Sans TC', sans-serif;
+  --font-heading: 'Noto Serif TC', serif;
+}
+
+/* Self-hosted Cal Sans font — avoids CORS issues across browsers */
+@font-face {
+	font-family: 'Cal Sans';
+	font-style: normal;
+	font-weight: 600;
+	src: url('/fonts/CalSans-SemiBold.woff2') format('woff2');
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Cal Sans';
+	font-style: normal;
+	font-weight: 700;
+	src: url('/fonts/CalSans-Bold.woff2') format('woff2');
+	font-display: swap;
+}
+
+/* Fallback: map weight 400 to SemiBold so existing code with font-weight:normal still works */
+@font-face {
+	font-family: 'Cal Sans';
+	font-style: normal;
+	font-weight: 400;
+	src: url('/fonts/CalSans-SemiBold.woff2') format('woff2');
+	font-display: swap;
+}
+
+@layer base {
+  /* Cross-browser color scheme consistency */
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply font-sans bg-light text-dark;
+    overflow-x: hidden;
+    width: 100%;
+    /* Ensure consistent text rendering across browsers */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold;
+  }
+
+  /* Cross-browser backdrop-filter support */
+  .backdrop-blur-md {
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .backdrop-blur-sm {
+    -webkit-backdrop-filter: blur(4px);
+  }
+}
+
+/* Hero Video Layout — standard CSS media queries for cross-browser consistency */
+.hero-video-wrapper {
+  padding: 0;
+}
+.hero-video-inner {
+  border-radius: 0;
+}
+@media (min-width: 1024px) {
+  .hero-video-wrapper {
+    padding: 12px;
+  }
+  .hero-video-inner {
+    border-radius: 1rem;
+  }
+}
+
+/* Custom Swiper Pagination Styles */
+
+.swiper {
+  padding-bottom: 40px !important;
+}
+.swiper-pagination {
+  bottom: 0px !important;
+}
+.swiper-pagination-bullet {
+  background-color: #999 !important;
+  opacity: 0.5 !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: var(--color-seppa-red) !important;
+  opacity: 1 !important;
+}
+
+@layer utilities {
+  .shine-overlay {
+    position: absolute;
+    width: 200%;
+    height: 0%;
+    left: 50%;
+    top: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%) rotate(-45deg);
+    z-index: 10;
+    pointer-events: none;
+    transition: none;
+  }
+  
+  .group:hover > .shine-overlay,
+  .group\/image:hover > .shine-overlay {
+    height: 250%;
+    transition: all 600ms linear;
+    background-color: transparent;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+

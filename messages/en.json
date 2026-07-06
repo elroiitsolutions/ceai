@@ -1,0 +1,49 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "ourMission": "Our Mission",
+    "laborLaw": "Labor Law",
+    "governmentPolicy": "Government Policy",
+    "industrialZones": "Industrial Zones",
+    "investmentInfo": "Investment Info",
+    "eventSharing": "Event Sharing",
+    "culturalExchange": "Cultural Exchange",
+    "tecc": "TECC",
+    "contact": "Contact Us",
+    "learnMore": "Learn More"
+  },
+  "Footer": {
+    "tel": "Tel",
+    "email": "Email"
+  },
+  "CityPage": {
+    "majorCities": "MAJOR CITIES",
+    "keyBusinessDistricts": "Key Business Districts",
+    "taiwaneseCompanies": "TAIWANESE COMPANIES",
+    "latestPolicies": "Latest Policies & Regulations",
+    "contactInformation": "Contact Information",
+    "officeAddress": "Office Address",
+    "phone": "Phone",
+    "email": "Email",
+    "keyAdvantages": "Key Advantages"
+  },
+  "ContactPage": {
+    "headquarters": "Headquarters",
+    "getInTouch": "Get In Touch",
+    "description": "Reach out to our corporate headquarters or explore our global branch offices to connect with a representative near you.",
+    "tollFree": "Toll Free:",
+    "quickEmail": "Quick Email:",
+    "corporateOffice": "Corporate Office:",
+    "sendMessage": "Send us a message",
+    "yourName": "Your Name *",
+    "emailAddress": "Email Address *",
+    "phoneNumber": "Phone Number *",
+    "location": "Location *",
+    "writeMessage": "Write Message... *",
+    "submitMessage": "Submit Message"
+  },
+  "IndustrialPage": {
+    "keyAdvantages": "Key Advantages",
+    "exclusiveIncentives": "Exclusive Incentives"
+  }
+}

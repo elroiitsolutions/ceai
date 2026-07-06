@@ -1,0 +1,49 @@
+{
+  "Navigation": {
+    "home": "首頁",
+    "ourMission": "我們的使命",
+    "laborLaw": "勞動法令",
+    "governmentPolicy": "政府政策",
+    "industrialZones": "工業園區",
+    "investmentInfo": "投資資訊",
+    "eventSharing": "活動分享",
+    "culturalExchange": "文化交流",
+    "tecc": "TECC",
+    "contact": "聯絡我們",
+    "learnMore": "了解更多"
+  },
+  "Footer": {
+    "tel": "電話",
+    "email": "電郵"
+  },
+  "CityPage": {
+    "majorCities": "主要城市",
+    "keyBusinessDistricts": "主要商業區",
+    "taiwaneseCompanies": "台灣企業",
+    "latestPolicies": "最新政策與法規",
+    "contactInformation": "聯絡資訊",
+    "officeAddress": "辦公室地址",
+    "phone": "電話",
+    "email": "電郵",
+    "keyAdvantages": "主要優勢"
+  },
+  "ContactPage": {
+    "headquarters": "總部",
+    "getInTouch": "聯絡我們",
+    "description": "請與我們的企業總部聯繫，或探索我們的全球分公司以聯繫您附近的代表。",
+    "tollFree": "免費專線:",
+    "quickEmail": "電子郵件:",
+    "corporateOffice": "企業辦公室:",
+    "sendMessage": "發送訊息給我們",
+    "yourName": "您的姓名 *",
+    "emailAddress": "電子郵件地址 *",
+    "phoneNumber": "電話號碼 *",
+    "location": "地點 *",
+    "writeMessage": "填寫訊息... *",
+    "submitMessage": "提交訊息"
+  },
+  "IndustrialPage": {
+    "keyAdvantages": "主要優勢",
+    "exclusiveIncentives": "專屬獎勵"
+  }
+}

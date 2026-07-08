@@ -56,18 +56,15 @@ export const BackgroundSlideshow = ({ images, className = "absolute inset-0" }: 
     </div>
   );
 };
- 
 interface HomeHeroProps {
   data?: any;
 }
 
 const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
   const pathname = usePathname();
-  
   const title = data?.title ?? "Connecting New Business Opportunities";
   const subtitle = data?.subtitle ?? "We are committed to providing policy interpretation, regulatory consultation, industrial zone matchmaking, and investment alignment to co-create a prosperous future.";
   const badge = data?.badge ?? "★ PREMIER PLATFORM FOR INDIA-TAIWAN EXCHANGE";
-  
   // Extract all background images as an array of URLs
   const getBackgroundImages = (): string[] => {
     const bgData = data?.backgroundImage;
@@ -92,15 +89,18 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
     }).filter(Boolean);
   };
 
-  const backgroundImages = getBackgroundImages();
-  
+  const backgroundImages = getBackgroundImages().sort((a, b) => {
+    if (a.toLowerCase().includes('building')) return -1;
+    if (b.toLowerCase().includes('building')) return 1;
+    return 0;
+  });
   // Custom fallback list of beautiful corporate/exchange-related background images
   const fallbackImages = [
     "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80",
     "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80",
     "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1920&q=80"
   ];
-  
+
   let slideshowImages = backgroundImages.length > 0 ? backgroundImages : fallbackImages;
 
   // TEMPORARY DEMO OVERRIDE: Force mission page to use the newly generated banners if API images are not set
@@ -120,7 +120,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
   const primaryBtnHref = data?.primaryButton?.href || "/industrial";
   const secondaryBtnLabel = data?.secondaryButton?.label || "Investment Opportunities";
   const secondaryBtnHref = data?.secondaryButton?.href || "/investment";
-  
+
   // Only use simple page-header mode on pages OTHER than the home page
   const isHomePage = pathname === '/' || pathname === '';
   const isSimpleMode = !isHomePage;
@@ -132,9 +132,9 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
         <BackgroundSlideshow images={slideshowImages} className="absolute top-[64px] md:top-[112px] lg:top-[132px] bottom-0 left-0 right-0" />
         {/* Dark overlay */}
         <div className="absolute top-[64px] md:top-[112px] lg:top-[132px] bottom-0 left-0 right-0 bg-dark/40 z-0"></div>
-        
+
         <div className="container mx-auto px-4 lg:px-8 relative z-10 text-left">
-          <motion.div 
+          <motion.div
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
@@ -145,7 +145,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
                 {title}
               </h1>
             </motion.div>
-            
+
             {/* Breadcrumbs (Hardcoded to Home / [Title] for now as per design) */}
             <motion.nav variants={fadeInUp} className="flex items-center justify-start space-x-2 text-white font-medium text-lg mb-6">
               <Link href="/" className="hover:text-gold transition duration-300">
@@ -218,7 +218,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
               {badge.replace('★', '').trim()}
             </span>
           </motion.div>
-          
+
           <motion.h1
             variants={fadeInUp}
             className="font-heading font-bold text-white"
@@ -226,19 +226,19 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
           >
             {title}
           </motion.h1>
-          
+
           <motion.p variants={fadeInUp} className="text-base md:text-lg 2xl:text-xl text-gray-300 leading-relaxed max-w-[650px] mt-4 lg:mt-6">
             {subtitle}
           </motion.p>
-          
+
           <motion.div variants={fadeInUp} className="flex flex-col md:flex-row items-start md:items-center mt-8 lg:mt-12 gap-4 lg:gap-6">
             <Link href={primaryBtnHref} className="inline-flex items-center gap-2 bg-orange-500 text-white px-8 py-3.5 rounded-full font-semibold text-base hover:bg-orange-600 transition duration-300">
               {primaryBtnLabel}
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </Link>
-            
-            <Link 
-              href={secondaryBtnHref} 
+
+            <Link
+              href={secondaryBtnHref}
               className="inline-flex items-center justify-center border border-white/40 text-white px-8 py-3.5 rounded-full font-semibold text-base hover:bg-white/10 hover:border-white transition-all duration-300"
             >
               {secondaryBtnLabel}

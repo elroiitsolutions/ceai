@@ -28,7 +28,7 @@ const LaborView: React.FC<LaborViewProps> = ({ data }) => {
       return items.map((item: any) => {
         const url = item?.attributes?.url || item?.url;
         if (!url) return '';
-        return url.startsWith('http') ? url : `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://127.0.0.1:1337'}${url}`;
+        return url;
       }).filter(Boolean);
     }
 
@@ -36,7 +36,7 @@ const LaborView: React.FC<LaborViewProps> = ({ data }) => {
     return items.map((item: any) => {
       const url = item?.url;
       if (!url) return '';
-      return url.startsWith('http') ? url : `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://127.0.0.1:1337'}${url}`;
+      return url;
     }).filter(Boolean);
   };
 

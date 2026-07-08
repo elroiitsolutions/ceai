@@ -1,3 +1,4 @@
+import { setRequestLocale } from 'next-intl/server';
 import type { Metadata } from "next";
 import "../globals.css";
 import MainLayout from "../../layouts/MainLayout";
@@ -20,6 +21,7 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
+  setRequestLocale(locale);
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }
@@ -52,4 +54,9 @@ export default async function RootLayout({
       </body>
     </html>
   );
+}
+
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
 }

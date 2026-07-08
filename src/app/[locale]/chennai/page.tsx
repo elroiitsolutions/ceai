@@ -1,11 +1,14 @@
+import { setRequestLocale } from 'next-intl/server';
 import { fetchAPI } from '@/lib/api';
-import { getLocale, getTranslations } from 'next-intl/server';
+import {  getTranslations } from 'next-intl/server';
 import PolicyAccordionCard from '@/components/shared/PolicyAccordionCard';
 import CityContactAndAdvantages from '@/components/shared/CityContactAndAdvantages';
 import PageHeader from '@/components/layout/PageHeader';
 
-export async function generateMetadata() {
-  const locale = await getLocale();
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  
   const fetched = await fetchAPI('/city-pages', { 
     locale, 
     filters: { slug: { $eq: 'chennai' } }
@@ -18,8 +21,10 @@ export async function generateMetadata() {
   };
 }
 
-export default async function ChennaiPage() {
-  const locale = await getLocale();
+export default async function ChennaiPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  
   const t = await getTranslations('CityPage');
   const fetched = await fetchAPI('/city-pages', { 
     locale, 
@@ -45,7 +50,7 @@ export default async function ChennaiPage() {
       return items.map((item: any) => {
         const url = item?.attributes?.url || item?.url;
         if (!url) return '';
-        return url.startsWith('http') ? url : `${API_URL}${url}`;
+        return url;
       }).filter(Boolean);
     }
 
@@ -53,7 +58,7 @@ export default async function ChennaiPage() {
     return items.map((item: any) => {
       const url = item?.url;
       if (!url) return '';
-      return url.startsWith('http') ? url : `${API_URL}${url}`;
+      return url;
     }).filter(Boolean);
   };
 
@@ -113,4 +118,8 @@ export default async function ChennaiPage() {
       </div>
     </div>
   );
+}
+
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'zh' }];
 }

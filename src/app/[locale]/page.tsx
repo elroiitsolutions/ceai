@@ -1,12 +1,14 @@
+import { setRequestLocale } from 'next-intl/server';
 import React from 'react';
 import HomeView from './HomeView';
 import { fetchAPI } from '@/lib/api';
-import { getLocale } from 'next-intl/server';
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
 
-export async function generateMetadata() {
-  const locale = await getLocale();
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  
   const seoData = await fetchAPI('/seo', { locale, populate: '*' });
   const seo = seoData?.data?.attributes || seoData?.data;
 
@@ -16,8 +18,10 @@ export async function generateMetadata() {
   };
 }
 
-export default async function Page() {
-  const locale = await getLocale();
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  
   const homeData = await fetchAPI('/home', { locale, populate: 'deep' });
 
   // Strapi v5 returns data directly on `data`, v4 nests under `data.attributes`
@@ -28,4 +32,8 @@ export default async function Page() {
       <HomeView data={data} />
     </>
   );
+}
+
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'zh' }];
 }

@@ -68,7 +68,7 @@ const Header: React.FC<HeaderProps> = ({ globalData, navigationData }) => {
             </Link>
             
             {/* Texts */}
-            <div className="flex flex-col justify-center flex-1 pr-2">
+            <div className="flex flex-col justify-center flex-1 min-w-0 pr-2">
               <h1 className="text-seppa-blue font-bold text-[11px] sm:text-sm md:text-base lg:text-lg leading-tight truncate">
                 {isZh ? 'CEAI 印度台灣商務交流協會' : 'CEAI - Commercial Exchange Association of India'}
               </h1>

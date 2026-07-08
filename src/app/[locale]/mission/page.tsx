@@ -1,12 +1,14 @@
+import { setRequestLocale } from 'next-intl/server';
 import React from 'react';
 import AboutView from './AboutView';
 import { fetchAPI } from '@/lib/api';
-import { getLocale } from 'next-intl/server';
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
 
-export async function generateMetadata() {
-  const locale = await getLocale();
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  
   const seoData = await fetchAPI('/seo', { locale, populate: '*' });
   
   return {
@@ -15,8 +17,10 @@ export async function generateMetadata() {
   };
 }
 
-export default async function Page() {
-  const locale = await getLocale();
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  
   const aboutData = await fetchAPI('/mission', { locale, populate: 'deep' });
 
   return (
@@ -24,4 +28,8 @@ export default async function Page() {
       <AboutView data={aboutData?.data || aboutData?.data?.attributes} />
     </>
   );
+}
+
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'zh' }];
 }

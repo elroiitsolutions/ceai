@@ -1,10 +1,13 @@
+import { setRequestLocale } from 'next-intl/server';
 import React from 'react';
 import IndustrialView from './IndustrialView';
 import { fetchAPI } from '@/lib/api';
-import { getLocale } from 'next-intl/server';
 
-export async function generateMetadata() {
-  const locale = await getLocale();
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  
   const seoData = await fetchAPI('/industrial-page', { locale, populate: '*' });
   
   const attributes = seoData?.data?.attributes;
@@ -14,8 +17,10 @@ export async function generateMetadata() {
   };
 }
 
-export default async function Page() {
-  const locale = await getLocale();
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  
   
   const pageFetched = await fetchAPI('/industrial-page', { locale, populate: '*' });
   const pageData = pageFetched?.data?.attributes || {};
@@ -35,4 +40,9 @@ export default async function Page() {
       <IndustrialView data={data} pageData={pageData} />
     </>
   );
+}
+
+
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'zh' }];
 }

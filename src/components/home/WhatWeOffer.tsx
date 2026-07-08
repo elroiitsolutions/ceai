@@ -20,7 +20,7 @@ const WhatWeOffer: React.FC<WhatWeOfferProps> = ({ data }) => {
     // Handle Strapi v4/v5 media
     const media = c.image?.data?.attributes || c.image || null;
     const imageUrl = media?.url
-      ? (media.url.startsWith('http') ? media.url : `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://127.0.0.1:1337'}${media.url}`)
+      ? (media.url)
       : "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"; // fallback
       
     // Assign generic colors/icons based on index if icon data isn't provided

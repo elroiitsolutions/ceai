@@ -28,7 +28,7 @@ const IndustrialView: React.FC<IndustrialViewProps> = ({ data = [], pageData = {
       return items.map((item: any) => {
         const url = item?.attributes?.url || item?.url;
         if (!url) return '';
-        return url.startsWith('http') ? url : `${API_URL}${url}`;
+        return url;
       }).filter(Boolean);
     }
 
@@ -36,7 +36,7 @@ const IndustrialView: React.FC<IndustrialViewProps> = ({ data = [], pageData = {
     return items.map((item: any) => {
       const url = item?.url;
       if (!url) return '';
-      return url.startsWith('http') ? url : `${API_URL}${url}`;
+      return url;
     }).filter(Boolean);
   };
 
@@ -62,7 +62,7 @@ const IndustrialView: React.FC<IndustrialViewProps> = ({ data = [], pageData = {
               let imageUrl = '';
               const coverMedia = attrs.coverImage?.data?.attributes || attrs.coverImage;
               if (coverMedia?.url) {
-                imageUrl = coverMedia.url.startsWith('http') ? coverMedia.url : `${API_URL}${coverMedia.url}`;
+                imageUrl = coverMedia.url;
               }
 
               return (

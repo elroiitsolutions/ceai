@@ -103,8 +103,8 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
   
   let slideshowImages = backgroundImages.length > 0 ? backgroundImages : fallbackImages;
 
-  // TEMPORARY DEMO OVERRIDE: Force mission page to use the newly generated banners
-  if (pathname.includes('/mission')) {
+  // TEMPORARY DEMO OVERRIDE: Force mission page to use the newly generated banners if API images are not set
+  if (pathname.includes('/mission') && backgroundImages.length === 0) {
     slideshowImages = [missionBanner1.src, missionBanner2.src, missionBanner3.src];
   }
 

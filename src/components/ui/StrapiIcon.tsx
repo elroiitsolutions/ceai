@@ -6,7 +6,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as MdIcons from 'react-icons/md';
 
 interface StrapiIconProps {
-  name?: string | null;
+  name?: any;
   className?: string;
 }
 
@@ -24,7 +24,24 @@ export default function StrapiIcon({ name, className = "w-6 h-6" }: StrapiIconPr
 
   if (!name) return null;
 
-  const trimmed = name.trim();
+  // Handle case where icon is a media object uploaded via Strapi
+  if (typeof name === 'object') {
+    const url = name?.url || name?.data?.attributes?.url;
+    if (url) {
+      const fullUrl = url.startsWith('http') ? url : `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://127.0.0.1:1337'}${url}`;
+      return (
+        <img 
+          src={fullUrl} 
+          className={className} 
+          alt="Icon" 
+        />
+      );
+    }
+  }
+
+  const nameStr = typeof name === 'string' ? name : String(name || '');
+  if (!nameStr) return null;
+  const trimmed = nameStr.trim();
 
   // 1. If it looks like raw SVG code, render it safely.
   if (trimmed.startsWith('<svg') || trimmed.includes('<path') || trimmed.startsWith('<')) {

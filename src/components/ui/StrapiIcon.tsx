@@ -28,7 +28,7 @@ export default function StrapiIcon({ name, className = "w-6 h-6" }: StrapiIconPr
   if (typeof name === 'object') {
     const url = name?.url || name?.data?.attributes?.url;
     if (url) {
-      const fullUrl = url.startsWith('http') ? url : `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://127.0.0.1:1337'}${url}`;
+      const fullUrl = url;
       return (
         <img 
           src={fullUrl} 

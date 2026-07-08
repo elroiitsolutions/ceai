@@ -1,6 +1,5 @@
 import React from 'react';
 import { StrapiMedia } from '@/types/strapi';
-import { getStrapiURL } from '@/lib/strapi-url';
 
 interface StrapiImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   media: StrapiMedia | null | undefined;
@@ -12,9 +11,7 @@ export default function StrapiImage({ media, fallback, className, alt, ...props 
     return null;
   }
 
-  const imageUrl = media?.url 
-    ? (media.url.startsWith('http') ? media.url : getStrapiURL(media.url))
-    : fallback;
+  const imageUrl = media?.url || fallback;
 
   if (!imageUrl) return null;
 

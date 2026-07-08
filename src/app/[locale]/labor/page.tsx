@@ -1,10 +1,13 @@
+import { setRequestLocale } from 'next-intl/server';
 import React from 'react';
 import LaborView from './LaborView';
 import { fetchAPI } from '@/lib/api';
-import { getLocale } from 'next-intl/server';
 
-export async function generateMetadata() {
-  const locale = await getLocale();
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  
   const seoData = await fetchAPI('/seo', { locale, populate: '*' });
   
   return {
@@ -13,8 +16,10 @@ export async function generateMetadata() {
   };
 }
 
-export default async function Page() {
-  const locale = await getLocale();
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  
   const fetched = await fetchAPI('/labor', { locale, populate: '*' });
   const data = fetched?.data;
 
@@ -23,4 +28,9 @@ export default async function Page() {
       <LaborView data={data} />
     </>
   );
+}
+
+
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'zh' }];
 }

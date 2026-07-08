@@ -79,7 +79,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
       return items.map((item: any) => {
         const url = item?.attributes?.url || item?.url;
         if (!url) return '';
-        return url.startsWith('http') ? url : `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://127.0.0.1:1337'}${url}`;
+        return url;
       }).filter(Boolean);
     }
 
@@ -88,7 +88,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
     return items.map((item: any) => {
       const url = item?.url;
       if (!url) return '';
-      return url.startsWith('http') ? url : `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://127.0.0.1:1337'}${url}`;
+      return url;
     }).filter(Boolean);
   };
 
@@ -111,7 +111,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
   // Handle background video
   const bannerMedia = data?.backgroundVideo?.data?.attributes || data?.backgroundVideo || null;
   const bannerUrl = bannerMedia?.url
-    ? (bannerMedia.url.startsWith('http') ? bannerMedia.url : `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://127.0.0.1:1337'}${bannerMedia.url}`)
+    ? (bannerMedia.url)
     : null;
 
   // Checklist removed to match reference design

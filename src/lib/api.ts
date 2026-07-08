@@ -16,7 +16,7 @@ export async function fetchAPI(path: string, urlParamsObject: Record<string, any
       'Content-Type': 'application/json',
       ...(process.env.STRAPI_API_TOKEN ? { Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}` } : {}),
     },
-    next: { revalidate: 0 }, // Disable Next.js fetch caching so Strapi changes show up immediately
+    next: { revalidate: 3600 }, // Disable Next.js fetch caching so Strapi changes show up immediately
     ...options,
   };
 

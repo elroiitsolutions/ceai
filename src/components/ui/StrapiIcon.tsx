@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import * as FiIcons from 'react-icons/fi';
 import * as LuIcons from 'react-icons/lu';
 import * as FaIcons from 'react-icons/fa';
@@ -11,17 +11,6 @@ interface StrapiIconProps {
 }
 
 export default function StrapiIcon({ name, className = "w-6 h-6" }: StrapiIconProps) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    // Render a placeholder matching initial layout during hydration/SSR
-    return <div className={className} />;
-  }
-
   if (!name) return null;
 
   // Handle case where icon is a media object uploaded via Strapi

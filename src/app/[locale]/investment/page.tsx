@@ -8,7 +8,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   
-  const seoData = await fetchAPI('/investment', { locale, populate: '*' });
+  const seoData = await fetchAPI('/investment', { 
+    locale, 
+    populate: ['seoMeta'] 
+  });
   const seo = seoData?.data?.attributes || seoData?.data;
   
   return {
@@ -21,7 +24,27 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   const { locale } = await params;
   setRequestLocale(locale);
   
-  const fetched = await fetchAPI('/investment', { locale, populate: '*' });
+  const fetched = await fetchAPI('/investment', { 
+    locale, 
+    populate: [
+      'seoMeta',
+      'policies',
+      'contentBlocks',
+      'contentBlocks.primaryButton',
+      'contentBlocks.secondaryButton',
+      'contentBlocks.cards',
+      'contentBlocks.cards.image',
+      'contentBlocks.stats',
+      'contentBlocks.items',
+      'contentBlocks.items.image',
+      'contentBlocks.members',
+      'contentBlocks.members.photo',
+      'contentBlocks.image',
+      'contentBlocks.background',
+      'contentBlocks.backgroundImage',
+      'contentBlocks.backgroundVideo'
+    ] 
+  });
   const data = fetched?.data;
 
   return (

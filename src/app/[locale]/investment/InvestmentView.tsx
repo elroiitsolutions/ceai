@@ -3,6 +3,7 @@ import React from 'react';
 import PageHeader from '@/components/layout/PageHeader';
 import { useTranslations } from 'next-intl';
 import PolicyAccordionCard from '@/components/shared/PolicyAccordionCard';
+import DynamicZoneRenderer from '@/components/ui/DynamicZoneRenderer';
 
 interface InvestmentViewProps {
   data?: any;
@@ -10,6 +11,8 @@ interface InvestmentViewProps {
 
 const InvestmentView: React.FC<InvestmentViewProps> = ({ data }) => {
   const t = useTranslations('Navigation');
+  
+  const contentBlocks = data?.contentBlocks || [];
   
   const title = data?.title || "Investment Info";
   const subtitle = data?.subtitle || "Stay informed of the latest investment opportunities and guidelines.";
@@ -42,37 +45,48 @@ const InvestmentView: React.FC<InvestmentViewProps> = ({ data }) => {
 
   const headerImages = getHeaderImages();
 
+  const hasHeroBlock = contentBlocks.some((block: any) => block.__component === 'sections.hero');
+
   return (
     <div className="bg-gray-50 min-h-screen">
-      <PageHeader 
-        title={title} 
-        subtitle={subtitle}
-        bgImage={headerImages.length > 0 ? headerImages : undefined}
-        breadcrumbs={[
-          { name: t('home'), path: '/' },
-          { name: t('investmentInfo') }
-        ]} 
-      />
+      {!hasHeroBlock && (
+        <PageHeader 
+          title={title} 
+          subtitle={subtitle}
+          bgImage={headerImages.length > 0 ? headerImages : undefined}
+          breadcrumbs={[
+            { name: t('home'), path: '/' },
+            { name: t('investmentInfo') }
+          ]} 
+        />
+      )}
 
-      {/* Main Content */}
-      <div className="max-w-5xl mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-seppa-blue mb-4">{sectionTitle}</h2>
-          <p className="text-gray-600">{sectionSubtitle}</p>
-        </div>
+      {/* Dynamic Zone Blocks */}
+      {contentBlocks.length > 0 && (
+        <DynamicZoneRenderer blocks={contentBlocks} />
+      )}
 
-        {policies.length > 0 ? (
+      {/* Policies list section */}
+      {policies.length > 0 && (
+        <div className="max-w-5xl mx-auto px-4 py-16">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-seppa-blue mb-4">{sectionTitle}</h2>
+            <p className="text-gray-600">{sectionSubtitle}</p>
+          </div>
           <div className="space-y-6">
             {policies.map((policy: any, idx: number) => (
               <PolicyAccordionCard key={idx} policy={policy} />
             ))}
           </div>
-        ) : (
-          <div className="text-center py-20 text-gray-500 text-lg">
-            Content is currently being updated.
-          </div>
-        )}
-      </div>
+        </div>
+      )}
+
+      {/* Fallback if page is completely empty */}
+      {contentBlocks.length === 0 && policies.length === 0 && (
+        <div className="max-w-5xl mx-auto px-4 py-16 text-center py-20 text-gray-500 text-lg">
+          Content is currently being updated.
+        </div>
+      )}
     </div>
   );
 };

@@ -27,6 +27,18 @@ const staggerContainer = {
   visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
 };
 
+// Format relative Strapi media URLs to absolute URLs
+const formatImageUrl = (url: string): string => {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:') || url.startsWith('/uploads/')) {
+    return url;
+  }
+  const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://13.234.18.254:1337';
+  const cleanBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+  const cleanPath = url.startsWith('/') ? url : `/${url}`;
+  return `${cleanBase}${cleanPath}`;
+};
+
 export const BackgroundSlideshow = ({ images, className = "absolute inset-0" }: { images: string[]; className?: string }) => {
   const [index, setIndex] = useState(0);
 
@@ -56,6 +68,7 @@ export const BackgroundSlideshow = ({ images, className = "absolute inset-0" }: 
     </div>
   );
 };
+
 interface HomeHeroProps {
   data?: any;
 }
@@ -65,12 +78,12 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
   const title = data?.title ?? "Connecting New Business Opportunities";
   const subtitle = data?.subtitle ?? "We are committed to providing policy interpretation, regulatory consultation, industrial zone matchmaking, and investment alignment to co-create a prosperous future.";
   const badge = data?.badge ?? "★ PREMIER PLATFORM FOR INDIA-TAIWAN EXCHANGE";
+
   // Extract all background images as an array of URLs
   const getBackgroundImages = (): string[] => {
     const bgData = data?.backgroundImage;
     if (!bgData) return [];
 
-    // Case 1: Strapi v4 nested structure: { data: [ { attributes: { url: ... } } ] }
     if (bgData.data) {
       const items = Array.isArray(bgData.data) ? bgData.data : [bgData.data];
       return items.map((item: any) => {
@@ -80,7 +93,6 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
       }).filter(Boolean);
     }
 
-    // Case 2: Strapi v5 flat structure or array of media: [ { url: ... } ]
     const items = Array.isArray(bgData) ? bgData : [bgData];
     return items.map((item: any) => {
       const url = item?.url;
@@ -94,6 +106,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
     if (b.toLowerCase().includes('building')) return 1;
     return 0;
   });
+
   // Custom fallback list of beautiful corporate/exchange-related background images
   const fallbackImages = [
     "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80",
@@ -108,20 +121,20 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
     slideshowImages = [missionBanner1.src, missionBanner2.src, missionBanner3.src];
   }
 
+  // Resolve all images to absolute URLs
+  const processedSlideshowImages = slideshowImages.map(formatImageUrl);
+
   // Handle background video
   const bannerMedia = data?.backgroundVideo?.data?.attributes || data?.backgroundVideo || null;
   const bannerUrl = bannerMedia?.url
-    ? (bannerMedia.url)
+    ? formatImageUrl(bannerMedia.url)
     : null;
-
-  // Checklist removed to match reference design
 
   const primaryBtnLabel = data?.primaryButton?.label || "Explore Zones";
   const primaryBtnHref = data?.primaryButton?.href || "/industrial";
   const secondaryBtnLabel = data?.secondaryButton?.label || "Investment Opportunities";
   const secondaryBtnHref = data?.secondaryButton?.href || "/investment";
 
-  // Only use simple page-header mode on pages OTHER than the home page
   const isHomePage = pathname === '/' || pathname === '';
   const isSimpleMode = !isHomePage;
 
@@ -129,7 +142,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
     return (
       <section className="pt-32 lg:pt-52 pb-16 lg:pb-28 min-h-[400px] lg:min-h-[550px] relative overflow-hidden w-full bg-gradient-to-br from-seppa-blue to-[#0a3a7a] flex flex-col justify-center">
         {/* Background Slideshow with Animation */}
-        <BackgroundSlideshow images={slideshowImages} className="absolute top-[64px] md:top-[112px] lg:top-[132px] bottom-0 left-0 right-0" />
+        <BackgroundSlideshow images={processedSlideshowImages} className="absolute top-[64px] md:top-[112px] lg:top-[132px] bottom-0 left-0 right-0" />
         {/* Dark overlay */}
         <div className="absolute top-[64px] md:top-[112px] lg:top-[132px] bottom-0 left-0 right-0 bg-dark/40 z-0"></div>
 
@@ -188,7 +201,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({ data }) => {
             </>
           ) : (
             <>
-              <BackgroundSlideshow images={slideshowImages} />
+              <BackgroundSlideshow images={processedSlideshowImages} />
               <div className="absolute inset-0 z-10" style={{ background: 'linear-gradient(90deg, rgba(0,0,0,0.65), rgba(0,0,0,0.35))' }}></div>
             </>
           )}

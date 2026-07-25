@@ -1,6 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 import React from 'react';
-import PolicyView from './PolicyView';
+import EsgView from './EsgView';
 import { fetchAPI } from '@/lib/api';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -11,8 +11,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const seo = seoData?.data?.attributes || seoData?.data;
   
   return {
-    title: seo?.metaTitle ? `Policy - ${seo.metaTitle}` : "Government Policy - CEAI",
-    description: seo?.metaDescription || "CEAI",
+    title: seo?.metaTitle ? `ESG - ${seo.metaTitle}` : "ESG (Environmental, Social, Governance) - CEAI",
+    description: seo?.metaDescription || "CEAI ESG Page",
   };
 }
 
@@ -20,17 +20,17 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   const { locale } = await params;
   setRequestLocale(locale);
   
-  const [policyFetched, cityPagesFetched] = await Promise.all([
-    fetchAPI('/policy', { locale, populate: '*' }),
-    fetchAPI('/city-pages', { locale, populate: '*' })
-  ]);
-  
-  const data = policyFetched?.data;
-  const cityPages = cityPagesFetched?.data || [];
+  let data = null;
+  try {
+    const fetched = await fetchAPI('/esg', { locale, populate: '*' });
+    data = fetched?.data;
+  } catch (error) {
+    console.error("Error fetching ESG page from CMS, using defaults:", error);
+  }
 
   return (
     <>
-      <PolicyView data={data} cityPages={cityPages} />
+      <EsgView data={data} locale={locale} />
     </>
   );
 }

@@ -58,11 +58,25 @@ const IndustrialView: React.FC<IndustrialViewProps> = ({ data = [], pageData = {
               const attrs = zone.attributes || zone;
               const isEven = idx % 2 === 0;
               
+              // Format relative Strapi media URLs to absolute URLs
+              const formatImageUrl = (url: string): string => {
+                if (!url) return '';
+                if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('/uploads/')) {
+                  return url;
+                }
+                const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://13.234.18.254:1337';
+                const cleanBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+                const cleanPath = url.startsWith('/') ? url : `/${url}`;
+                return `${cleanBase}${cleanPath}`;
+              };
+
               // Process Image URL
               let imageUrl = '';
               const coverMedia = attrs.coverImage?.data?.attributes || attrs.coverImage;
               if (coverMedia?.url) {
-                imageUrl = coverMedia.url;
+                imageUrl = formatImageUrl(coverMedia.url);
+              } else {
+                imageUrl = "/uploads/industrial_zone_c_Uk_R6_Sf_Br_Ahan_Zt_L5s_Z5_K8_a4c988d09d.webp";
               }
 
               return (

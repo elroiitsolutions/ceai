@@ -30,7 +30,8 @@ const Footer: React.FC<FooterProps> = ({ globalData, footerData }) => {
     { id: 1, label: t('ourMission'), href: '/mission', isExternal: false },
     { id: 2, label: t('governmentPolicy'), href: '/policy', isExternal: false },
     { id: 3, label: t('investmentInfo'), href: '/investment', isExternal: false },
-    { id: 4, label: t('eventSharing'), href: '/events', isExternal: false }
+    { id: 4, label: t('eventSharing'), href: '/events', isExternal: false },
+    { id: 5, label: t('esg'), href: '/esg', isExternal: false }
   ];
 
   const column2Title = footerData?.column2Title || "CONTACT US";

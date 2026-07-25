@@ -41,6 +41,7 @@ const Header: React.FC<HeaderProps> = ({ globalData, navigationData }) => {
     { name: t('investmentInfo'), href: '/investment' },
     { name: t('eventSharing'), href: '/events' },
     { name: t('culturalExchange'), href: '/culture' },
+    { name: t('esg'), href: '/esg' },
   ];
 
   const navLinks = navigationData?.items?.length 

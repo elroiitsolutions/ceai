@@ -11,9 +11,17 @@ export default function StrapiImage({ media, fallback, className, alt, ...props 
     return null;
   }
 
-  const imageUrl = media?.url || fallback;
+  let imageUrl = media?.url || fallback;
 
   if (!imageUrl) return null;
+
+  // Format relative Strapi media URLs to absolute URLs
+  if (!imageUrl.startsWith('http://') && !imageUrl.startsWith('https://')) {
+    const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://13.234.18.254:1337';
+    const cleanBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+    const cleanPath = imageUrl.startsWith('/') ? imageUrl : `/${imageUrl}`;
+    imageUrl = `${cleanBase}${cleanPath}`;
+  }
 
   return (
     <img

@@ -11,7 +11,7 @@ interface PageHeaderProps {
   subtitle?: string;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ title, breadcrumbs, bgImage, subtitle }) => {
+export default function PageHeader({ title, breadcrumbs, bgImage, subtitle }: PageHeaderProps) {
   const isDefaultBg = !bgImage || bgImage === "https://demo.awaikenthemes.com/yarnex/wp-content/uploads/2026/02/page-header-bg.jpg";
   
   const finalImages = isDefaultBg
@@ -23,11 +23,25 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, breadcrumbs, bgImage, su
     : Array.isArray(bgImage)
     ? bgImage
     : [bgImage];
+
+  // Resolve relative media paths to absolute Strapi backend URLs
+  const formatImageUrl = (url: string): string => {
+    if (!url) return '';
+    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('/uploads/')) {
+      return url;
+    }
+    const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://13.234.18.254:1337';
+    const cleanBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+    const cleanPath = url.startsWith('/') ? url : `/${url}`;
+    return `${cleanBase}${cleanPath}`;
+  };
+
+  const processedImages = finalImages.map(formatImageUrl);
   
   return (
     <section className="pt-32 lg:pt-52 pb-16 lg:pb-28 min-h-[400px] lg:min-h-[550px] relative overflow-hidden bg-gradient-to-br from-seppa-blue to-[#0a3a7a] flex flex-col justify-center">
       {/* Background Slideshow with Animation */}
-      <BackgroundSlideshow images={finalImages} className="absolute top-[64px] md:top-[112px] lg:top-[132px] bottom-0 left-0 right-0" />
+      <BackgroundSlideshow images={processedImages} className="absolute top-[64px] md:top-[112px] lg:top-[132px] bottom-0 left-0 right-0" />
       
       {/* Dark overlay */}
       <div className="absolute top-[64px] md:top-[112px] lg:top-[132px] bottom-0 left-0 right-0 bg-dark/40 z-0"></div>
@@ -79,6 +93,4 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, breadcrumbs, bgImage, su
       </div>
     </section>
   );
-};
-
-export default PageHeader;
+}

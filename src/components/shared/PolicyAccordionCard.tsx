@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import StrapiRichText from '@/components/ui/StrapiRichText';
 import StrapiIcon from '@/components/ui/StrapiIcon';
@@ -17,6 +17,39 @@ interface PolicyAccordionCardProps {
 
 export default function PolicyAccordionCard({ policy, showIcon = false }: PolicyAccordionCardProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    '/tab-images/omg4.jpeg',
+    '/tab-images/img2.jpeg',
+    '/tab-images/img3.jpeg',
+    '/tab-images/img1.jpeg',
+    '/tab-images/img5.jpeg'
+  ];
+
+  const isApTaiwanCard = 
+    policy.title?.toLowerCase().includes('ap, taiwan') ||
+    policy.title?.includes('安得拉邦') ||
+    policy.description?.toLowerCase().includes('vijayawada') ||
+    policy.description?.toLowerCase().includes('n chandrababu naidu');
+
+  useEffect(() => {
+    if (!isOpen || !isApTaiwanCard) return;
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isOpen, isApTaiwanCard, slides.length]);
+
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
 
   // Split description by double newlines to isolate the first paragraph
   const descriptionBlocks = policy.description ? policy.description.split('\n\n') : [];
@@ -79,7 +112,7 @@ export default function PolicyAccordionCard({ policy, showIcon = false }: Policy
                 </span>
               )}
               
-              {remainingParagraphs && (
+              {(remainingParagraphs || isApTaiwanCard) && (
                 <motion.div
                   animate={{ rotate: isOpen ? 180 : 0 }}
                   className="text-gray-400 group-hover:text-seppa-red transition-colors flex-shrink-0 bg-gray-50 p-2 rounded-full"
@@ -109,7 +142,7 @@ export default function PolicyAccordionCard({ policy, showIcon = false }: Policy
           )}
           
           {/* Hide the rest until opened */}
-          {remainingParagraphs && (
+          {(remainingParagraphs || isApTaiwanCard) && (
             <AnimatePresence>
               {isOpen && (
                 <motion.div
@@ -118,16 +151,75 @@ export default function PolicyAccordionCard({ policy, showIcon = false }: Policy
                   exit={{ height: 0, opacity: 0 }}
                   className="overflow-hidden"
                 >
-                  <div className="pt-4 mt-2 text-gray-600 leading-relaxed prose max-w-none border-t border-gray-50">
-                    <StrapiRichText content={remainingParagraphs} />
-                  </div>
+                  {remainingParagraphs && (
+                    <div className="mt-4 p-5 md:p-6 bg-blue-50/15 border border-blue-100/50 rounded-2xl">
+                      <StrapiRichText content={remainingParagraphs} />
+                    </div>
+                  )}
+
+                  {/* Slideshow for AP Taiwan Card */}
+                  {isApTaiwanCard && (
+                    <div className="mt-5 relative w-full aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden group/slider border border-gray-100 shadow-sm">
+                      {/* Slides */}
+                      <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
+                        <AnimatePresence mode="wait">
+                          <motion.img
+                            key={currentSlide}
+                            src={slides[currentSlide]}
+                            alt={`AP Taiwan Event ${currentSlide + 1}`}
+                            initial={{ opacity: 0, scale: 1.02 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.5, ease: "easeInOut" }}
+                            className="w-full h-full object-cover"
+                          />
+                        </AnimatePresence>
+                      </div>
+
+                      {/* Navigation Arrows */}
+                      <button
+                        onClick={handlePrev}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-gray-800 flex items-center justify-center shadow-md hover:scale-105 active:scale-95 transition-all opacity-0 group-hover/slider:opacity-100 duration-300 z-10 cursor-pointer"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={handleNext}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-gray-800 flex items-center justify-center shadow-md hover:scale-105 active:scale-95 transition-all opacity-0 group-hover/slider:opacity-100 duration-300 z-10 cursor-pointer"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+
+                      {/* Pagination Dots */}
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                        {slides.map((_, idx) => (
+                          <button
+                            key={idx}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setCurrentSlide(idx);
+                            }}
+                            className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                              currentSlide === idx 
+                                ? 'w-6 bg-orange-500' 
+                                : 'w-2 bg-white/60 hover:bg-white'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>
           )}
 
           {/* Read More / Read Less Button */}
-          {remainingParagraphs && (
+          {(remainingParagraphs || isApTaiwanCard) && (
             <div className="mt-4 inline-block">
               <span className="text-orange-500 font-medium text-sm group-hover:text-seppa-red transition-colors flex items-center gap-1">
                 {isOpen ? 'Read Less' : 'Read More'} 

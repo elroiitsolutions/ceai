@@ -11,8 +11,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const seoData = await fetchAPI('/seo', { locale, populate: '*' });
   
   return {
-    title: seoData?.data?.attributes?.metaTitle || "Labor Law - CEAI",
-    description: seoData?.data?.attributes?.metaDescription || "CEAI",
+    title: seoData?.data?.attributes?.metaTitle || "Investment Guide - FCIEA",
+    description: seoData?.data?.attributes?.metaDescription || "FCIEA",
   };
 }
 

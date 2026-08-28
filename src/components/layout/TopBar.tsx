@@ -19,13 +19,13 @@ const TopBar: React.FC<TopBarProps> = ({ globalData }) => {
       <div className="flex items-center gap-3 lg:gap-4 max-w-[1700px] mx-auto w-full">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
-          <img src="/LOGOFINAL.png" alt={globalData?.siteName || "CEAI Logo"} className="h-10 lg:h-12 w-auto object-contain" />
+          <img src="/LOGOFINAL.png" alt={globalData?.siteName || "FCIEA Logo"} className="h-10 lg:h-12 w-auto object-contain" />
         </Link>
         
         {/* Texts */}
         <div className="flex flex-col justify-center">
           <h1 className="text-seppa-blue font-bold text-sm md:text-base lg:text-lg leading-tight md:leading-tight">
-            {isZh ? 'CEAI 印度台灣商務交流協會' : 'CEAI - Commercial Exchange Association of India'}
+            {isZh ? 'FCIEA 印度台灣商務交流協會' : 'FCIEA - Formosa Culture & Information Exchange Association Chennai'}
           </h1>
           <p className="text-orange-500 font-medium text-[10px] md:text-xs lg:text-sm leading-tight md:leading-tight mt-0.5">
             {isZh ? 'COMMERCIAL EXCHANGE ASSOCIATION OF INDIA | 印度商业交换协会' : 'The Official Business Bridge Promoting Trade and Cultural Exchange'}

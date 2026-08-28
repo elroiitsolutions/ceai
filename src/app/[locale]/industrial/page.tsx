@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   
   const attributes = seoData?.data?.attributes;
   return {
-    title: attributes?.seoMeta?.metaTitle || attributes?.title || "Industrial Zones - CEAI",
+    title: attributes?.seoMeta?.metaTitle || attributes?.title || "Industrial Zones - FCIEA",
     description: attributes?.seoMeta?.metaDescription || attributes?.subtitle || "In-depth analysis of key industrial parks.",
   };
 }

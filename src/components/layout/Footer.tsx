@@ -21,9 +21,9 @@ const Footer: React.FC<FooterProps> = ({ globalData, footerData }) => {
   const tFooter = useTranslations('Footer');
 
   // const logoUrl = globalData?.footerLogo?.url || globalData?.headerLogo?.url || logoImg.src;
-  const siteName = globalData?.siteName || "CEAI";
+  const siteName = globalData?.siteName || "FCIEA";
   
-  const headline = footerData?.headline || "CEAI (Commercial Exchange Association of India) is dedicated to promoting bilateral trade, investment, cultural, and technological cooperation. We are your most trusted partner in expanding into India-Taiwan markets.";
+  const headline = footerData?.headline || "FCIEA (Formosa Culture and Information Exchange Association Chennai) is dedicated to promoting bilateral trade, investment, cultural, and technological cooperation. We are your most trusted partner in expanding into India-Taiwan markets.";
   
   const column1Title = footerData?.column1Title || "QUICK LINKS";
   const column1Links = footerData?.column1Links || [
@@ -37,9 +37,9 @@ const Footer: React.FC<FooterProps> = ({ globalData, footerData }) => {
   const column2Title = footerData?.column2Title || "CONTACT US";
   
   const phone = footerData?.phone || "+886-2-1234-5678";
-  const email = footerData?.email || "info@ceai.org";
+  const email = footerData?.email || "info@fciea.org";
   const address = footerData?.address || "9F, No. 223, Zhonghua 1st Rd., Gushan Dist., Kaohsiung City 804, Taiwan";
-  const copyright = footerData?.copyright || `© ${new Date().getFullYear()} CEAI - Commercial Exchange Association of India. All Rights Reserved.`;
+  const copyright = footerData?.copyright || `© ${new Date().getFullYear()} FCIEA - Formosa Culture & Information Exchange Association Chennai. All Rights Reserved.`;
   const socialLinks = footerData?.socialLinks || [];
 
   return (

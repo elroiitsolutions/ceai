@@ -2,7 +2,7 @@
   "Navigation": {
     "home": "Home",
     "ourMission": "Our Mission",
-    "laborLaw": "Labor Law",
+    "laborLaw": "Investment Guide",
     "governmentPolicy": "Government Policy",
     "industrialZones": "Industrial Zones",
     "investmentInfo": "Business Services",
@@ -34,7 +34,7 @@
     "description": "Reach out to our corporate headquarters or explore our global branch offices to connect with a representative near you.",
     "tollFree": "Toll Free:",
     "quickEmail": "Quick Email:",
-    "corporateOffice": "Corporate Office:",
+    "corporateOffice": "India Office:",
     "sendMessage": "Send us a message",
     "yourName": "Your Name *",
     "emailAddress": "Email Address *",
@@ -46,5 +46,16 @@
   "IndustrialPage": {
     "keyAdvantages": "Key Advantages",
     "exclusiveIncentives": "Exclusive Incentives"
+  },
+  "LaborPage": {
+    "tab1Title": "Tab 1: Business & Legal",
+    "tab2Title": "Tab 2: Tax, Acc & Licensing",
+    "tab3Title": "Tab 3: Land & Plant Construction",
+    "tab1Heading": "Tab 1: Business & Legal Framework",
+    "tab2Heading": "Tab 2: Tax, Accounting & Licensing",
+    "tab3Heading": "Tab 3: Land & Plant Construction",
+    "tab1Desc": "This section covers FDI pathways, subsidiary vs. JV selection, resident director mandates, IPR protection, commercial contracts, and integrates the 2020 Labor Codes and employment visa guidelines.",
+    "tab2Desc": "This section delves into India's fiscal year (April 1 - March 31), CA audit mandates, the 15% concessional manufacturing corporate tax rate, FEMA remittance rules, GST brackets, and single-window licensing.",
+    "tab3Desc": "This section provides a 5-stage plant construction timeline, industrial park comparisons (GIDC/MIDC/SEZ), title investigations, FAR regulations, environmental CTE/CTO clearances, and utility guidelines."
   }
 }

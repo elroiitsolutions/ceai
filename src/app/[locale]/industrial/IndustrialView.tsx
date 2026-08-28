@@ -16,7 +16,7 @@ const IndustrialView: React.FC<IndustrialViewProps> = ({ data = [], pageData = {
   // Base API URL for images
   const API_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://127.0.0.1:1337';
 
-  const title = pageData.title || "Industrial Zones - CEAI";
+  const title = pageData.title || "Industrial Zones - FCIEA";
   const subtitle = pageData.subtitle || "In-depth analysis of key industrial parks, infrastructure, and exclusive Taiwanese clusters.";
 
   const getHeaderImages = (): string[] => {

@@ -9,8 +9,8 @@ import { routing } from '../../i18n/routing';
 import { fetchAPI } from '@/lib/api';
 
 export const metadata: Metadata = {
-  title: "CEAI - Commercial Exchange Association of India",
-  description: "CEAI",
+  title: "FCIEA - Formosa Culture & Information Exchange Association Chennai",
+  description: "FCIEA",
 };
 
 export default async function RootLayout({

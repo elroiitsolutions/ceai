@@ -142,7 +142,7 @@ const ContactUs: React.FC<ContactViewProps> = ({ data }) => {
               {/* India Office details */}
               <motion.div variants={fadeInUp} className="space-y-4">
                 <h3 className="text-xl font-bold font-heading text-seppa-blue border-b border-gray-200 pb-2">
-                  India Office
+                  Corporate Office
                 </h3>
 
                 <div className="flex items-start gap-4 p-5 bg-white rounded-2xl hover:shadow-md transition group border border-gray-100">

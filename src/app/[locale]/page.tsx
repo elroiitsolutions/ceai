@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const seo = seoData?.data?.attributes || seoData?.data;
 
   return {
-    title: seo?.metaTitle || "CEAI - Commercial Exchange Association of India",
+    title: seo?.metaTitle || "FCIEA - Formosa Culture & Information Exchange Association Chennai",
     description: seo?.metaDescription || "Connecting India and Taiwan",
   };
 }

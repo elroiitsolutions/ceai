@@ -2,7 +2,7 @@
   "Navigation": {
     "home": "首頁",
     "ourMission": "我們的使命",
-    "laborLaw": "勞動法令",
+    "laborLaw": "投资指南",
     "governmentPolicy": "政府政策",
     "industrialZones": "工業園區",
     "investmentInfo": "投資資訊",
@@ -46,5 +46,16 @@
   "IndustrialPage": {
     "keyAdvantages": "主要優勢",
     "exclusiveIncentives": "專屬獎勵"
+  },
+  "LaborPage": {
+    "tab1Title": "Tab 1: 商業與法律",
+    "tab2Title": "Tab 2: 稅務、會計與許可",
+    "tab3Title": "Tab 3: 土地與建廠規劃",
+    "tab1Heading": "Tab 1: Business & Legal Framework (公司設立與法務)",
+    "tab2Heading": "Tab 2: Tax, Accounting & Licensing (財稅會計與行政許可)",
+    "tab3Heading": "Tab 3: Land & Plant Construction (土地與建廠規劃)",
+    "tab1Desc": "本單元涵蓋外人直接投資 (FDI) 路徑選擇、子公司與合資企業 (JV) 比較、當地董事合規要求、智慧財產權 (IPR) 保護、商業合約審查，並完整整合原「勞工法令」之 2020 勞動法典與工作簽證指南。",
+    "tab2Desc": "本單元深入解析印度會計制度（4月1日至次年3月31日）、特許會計師（CA）審計要求、新設製造企業 15% 優惠企業所得稅率、FEMA 資金匯出規定、商品及服務稅 (GST) 級距，以及一站式行政審批與進出口證照清單。",
+    "tab3Desc": "本單元提供建廠 5 階段標準時間軸、古吉拉特邦 (GIDC) 與馬哈拉施特拉邦 (MIDC) 等工業園區選址比較、產權調查、建蔽率 (FAR) 規範、環評 CTE/CTO 許可證及公用事業水電專線申請指引。"
   }
 }

@@ -71,7 +71,7 @@ const Header: React.FC<HeaderProps> = ({ globalData, navigationData }) => {
             {/* Texts */}
             <div className="flex flex-col justify-center flex-1 min-w-0 pr-2">
               <h1 className="text-seppa-blue font-bold text-[11px] sm:text-sm md:text-base lg:text-lg leading-tight truncate">
-                {isZh ? 'CEAI 印度台灣商務交流協會' : 'CEAI - Commercial Exchange Association of India'}
+                {isZh ? 'FCIEA - 印度台灣文化資訊交流協會' : 'FCIEA - Formosa Culture & Information Exchange Association Chennai'}
               </h1>
               <p className="text-orange-500 font-medium text-[8px] sm:text-[10px] md:text-xs lg:text-sm leading-tight truncate mt-0.5 hidden sm:block">
                 {isZh ? 'COMMERCIAL EXCHANGE ASSOCIATION OF INDIA | 印度商业交换协会' : 'The Official Business Bridge Promoting Trade and Cultural Exchange'}

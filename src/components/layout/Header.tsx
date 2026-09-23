@@ -6,7 +6,6 @@ import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 import { StrapiGlobalData, StrapiNavigationData } from '@/types/strapi';
-import logoImg from '@/assets/LOGOFINAL.png';
 
 interface HeaderProps {
   globalData?: StrapiGlobalData | null;
@@ -65,13 +64,13 @@ const Header: React.FC<HeaderProps> = ({ globalData, navigationData }) => {
           <div className="flex items-center gap-2 lg:gap-4 max-w-[1700px] mx-auto w-full">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0 flex items-center">
-              <Image src={logoImg} alt={siteName} className="h-10 lg:h-12 w-auto object-contain" priority />
+              <img src="/fceac.png" alt={siteName || "FCEAC Logo"} className="h-10 lg:h-12 w-auto object-contain" />
             </Link>
             
             {/* Texts */}
             <div className="flex flex-col justify-center flex-1 min-w-0 pr-2">
               <h1 className="text-seppa-blue font-bold text-[11px] sm:text-sm md:text-base lg:text-lg leading-tight truncate">
-                {isZh ? 'FCIEA - 印度台灣文化資訊交流協會' : 'FCIEA - Formosa Culture & Information Exchange Association Chennai'}
+                {isZh ? 'FCEAC - 印度台灣文化交流協會' : 'FCEAC - Formosa Culture & Exchange Association Chennai'}
               </h1>
               <p className="text-orange-500 font-medium text-[8px] sm:text-[10px] md:text-xs lg:text-sm leading-tight truncate mt-0.5 hidden sm:block">
                 {isZh ? 'COMMERCIAL EXCHANGE ASSOCIATION OF INDIA | 印度商业交换协会' : 'The Official Business Bridge Promoting Trade and Cultural Exchange'}

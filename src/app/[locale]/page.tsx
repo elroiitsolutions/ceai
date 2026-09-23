@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const seo = seoData?.data?.attributes || seoData?.data;
 
   return {
-    title: seo?.metaTitle || "FCIEA - Formosa Culture & Information Exchange Association Chennai",
+    title: seo?.metaTitle || "FCEAC - Formosa Culture & Exchange Association Chennai",
     description: seo?.metaDescription || "Connecting India and Taiwan",
   };
 }

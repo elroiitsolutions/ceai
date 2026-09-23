@@ -8,7 +8,6 @@ import { MdLocationOn, MdPhone, MdEmail } from 'react-icons/md';
 import Image from 'next/image';
 
 import bgPattern from '@/assets/bg/black-line-1.png';
-import logoImg from '@/assets/LOGOFINAL.png';
 import { StrapiGlobalData, StrapiFooterData } from '@/types/strapi';
 
 interface FooterProps {
@@ -39,7 +38,7 @@ const Footer: React.FC<FooterProps> = ({ globalData, footerData }) => {
   const phone = footerData?.phone || "+886-2-1234-5678";
   const email = footerData?.email || "info@fciea.org";
   const address = footerData?.address || "9F, No. 223, Zhonghua 1st Rd., Gushan Dist., Kaohsiung City 804, Taiwan";
-  const copyright = footerData?.copyright || `© ${new Date().getFullYear()} FCIEA - Formosa Culture & Information Exchange Association Chennai. All Rights Reserved.`;
+  const copyright = footerData?.copyright || `© ${new Date().getFullYear()} FCEAC - Formosa Culture & Exchange Association Chennai. All Rights Reserved.`;
   const socialLinks = footerData?.socialLinks || [];
 
   return (
@@ -53,8 +52,8 @@ const Footer: React.FC<FooterProps> = ({ globalData, footerData }) => {
           {/* Column 1: Logo and Description */}
           <div className="md:col-span-5">
             <Link href="/" className="inline-block mb-6">
-              <Image 
-                src={logoImg} 
+              <img 
+                src="/fceac.png" 
                 alt={`${siteName} Logo`} 
                 className="h-14 w-auto transition-all duration-300 bg-white px-2 py-1 rounded object-contain" 
               />

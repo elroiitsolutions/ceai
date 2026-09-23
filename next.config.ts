@@ -21,13 +21,20 @@ const nextConfig: NextConfig = {
         port: "1337",
         pathname: "/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "ceaibackend.elroiitsolutions.com",
+        pathname: "/uploads/**",
+      },
     ],
   },
   async rewrites() {
+    const rawUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://13.234.18.254:1337';
+    const baseUrl = rawUrl.replace(/\/+$/, '');
     return [
       {
         source: '/uploads/:path*',
-        destination: `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://13.234.18.254:1337'}/uploads/:path*`,
+        destination: `${baseUrl}/uploads/:path*`,
       },
     ];
   },

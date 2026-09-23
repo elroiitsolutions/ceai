@@ -9,8 +9,13 @@ import { routing } from '../../i18n/routing';
 import { fetchAPI } from '@/lib/api';
 
 export const metadata: Metadata = {
-  title: "FCIEA - Formosa Culture & Information Exchange Association Chennai",
-  description: "FCIEA",
+  title: "FCEAC - Formosa Culture & Exchange Association Chennai",
+  description: "FCEAC",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default async function RootLayout({

@@ -60,11 +60,11 @@ const Header: React.FC<HeaderProps> = ({ globalData, navigationData }) => {
       <div className={`fixed top-0 inset-x-0 w-full z-50 transition-all duration-300 ${scrolled ? 'shadow-lg' : ''}`}>
         
         {/* TOP BAR (White Section) */}
-        <div className="w-full bg-white border-b border-gray-100 px-4 lg:px-8 h-[64px] lg:h-[76px] flex items-center justify-between relative z-20">
-          <div className="flex items-center gap-2 lg:gap-4 max-w-[1700px] mx-auto w-full">
+        <div className="w-full bg-white border-b border-gray-100 px-4 lg:px-8 h-[68px] lg:h-[82px] flex items-center justify-between relative z-20">
+          <div className="flex items-center gap-2.5 lg:gap-4 max-w-[1700px] mx-auto w-full">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0 flex items-center">
-              <img src="/fceac.png" alt={siteName || "FCEAC Logo"} className="h-10 lg:h-12 w-auto object-contain" />
+              <img src="/fceacfinal.png" alt={siteName || "FCEAC Logo"} className="h-12 w-12 sm:h-14 sm:w-14 lg:h-16 lg:w-16 rounded-full object-cover" />
             </Link>
             
             {/* Texts */}

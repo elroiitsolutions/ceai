@@ -53,9 +53,9 @@ const Footer: React.FC<FooterProps> = ({ globalData, footerData }) => {
           <div className="md:col-span-5">
             <Link href="/" className="inline-block mb-6">
               <img 
-                src="/fceac.png" 
+                src="/fceacfinal.png" 
                 alt={`${siteName} Logo`} 
-                className="h-14 w-auto transition-all duration-300 bg-white px-2 py-1 rounded object-contain" 
+                className="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover shadow-md hover:scale-105 transition-transform duration-300" 
               />
             </Link>
             <p className="text-gray-300 text-sm md:text-base leading-relaxed max-w-md">

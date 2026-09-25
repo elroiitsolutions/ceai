@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   title: "FCEAC - Formosa Culture & Exchange Association Chennai",
   description: "FCEAC",
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/fceacfinal.png",
+    shortcut: "/fceacfinal.png",
+    apple: "/fceacfinal.png",
   },
 };
 
@@ -46,6 +46,11 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/fceacfinal.png?v=2" type="image/png" />
+        <link rel="shortcut icon" href="/fceacfinal.png?v=2" type="image/png" />
+        <link rel="apple-touch-icon" href="/fceacfinal.png?v=2" />
+      </head>
       <body suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <MainLayout 

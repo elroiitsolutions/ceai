@@ -15,11 +15,11 @@ const TopBar: React.FC<TopBarProps> = ({ globalData }) => {
   const logoUrl = globalData?.headerLogo?.url || null;
 
   return (
-    <div className="fixed top-0 inset-x-0 w-full h-[64px] lg:h-[76px] bg-white border-b border-gray-100 px-4 lg:px-8 z-[60] flex items-center justify-between shadow-sm transition-all duration-300">
+    <div className="fixed top-0 inset-x-0 w-full h-[68px] lg:h-[82px] bg-white border-b border-gray-100 px-4 lg:px-8 z-[60] flex items-center justify-between shadow-sm transition-all duration-300">
       <div className="flex items-center gap-3 lg:gap-4 max-w-[1700px] mx-auto w-full">
         {/* Logo */}
-        <Link href="/" className="flex-shrink-0">
-          <img src="/fceac.png" alt={globalData?.siteName || "FCEAC Logo"} className="h-10 lg:h-12 w-auto object-contain" />
+        <Link href="/" className="flex-shrink-0 flex items-center">
+          <img src="/fceacfinal.png" alt={globalData?.siteName || "FCEAC Logo"} className="h-12 w-12 sm:h-14 sm:w-14 lg:h-16 lg:w-16 rounded-full object-cover" />
         </Link>
         
         {/* Texts */}

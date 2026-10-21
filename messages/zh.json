@@ -41,7 +41,11 @@
     "phoneNumber": "電話號碼 *",
     "location": "地點 *",
     "writeMessage": "填寫訊息... *",
-    "submitMessage": "提交訊息"
+    "submitMessage": "提交訊息",
+    "submitting": "發送中...",
+    "successTitle": "訊息已送出！",
+    "successMessage": "感謝您的聯繫，我們將儘快回覆您。",
+    "errorMessage": "訊息發送失敗，請再試一次或直接與我們聯絡。"
   },
   "IndustrialPage": {
     "keyAdvantages": "主要優勢",

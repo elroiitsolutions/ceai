@@ -12,8 +12,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const seo = seoData?.data?.attributes || seoData?.data;
   
   return {
-    title: seo?.seoMeta?.metaTitle ? `Culture - ${seo.seoMeta.metaTitle}` : "Cultural Exchange - FCIEA",
-    description: seo?.seoMeta?.metaDescription || "FCIEA",
+    title: seo?.seoMeta?.metaTitle ? `Culture - ${seo.seoMeta.metaTitle}` : "Cultural Exchange - FCIEAC",
+    description: seo?.seoMeta?.metaDescription || "FCIEAC",
   };
 }
 

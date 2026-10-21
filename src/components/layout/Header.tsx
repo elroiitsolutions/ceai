@@ -64,13 +64,13 @@ const Header: React.FC<HeaderProps> = ({ globalData, navigationData }) => {
           <div className="flex items-center gap-2.5 lg:gap-4 max-w-[1700px] mx-auto w-full">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0 flex items-center">
-              <img src="/fceacfinal.png" alt={siteName || "FCEAC Logo"} className="h-12 w-12 sm:h-14 sm:w-14 lg:h-16 lg:w-16 rounded-full object-cover" />
+              <img src="/fcieac.png" alt={siteName || "FCIEAC Logo"} className="h-12 w-12 sm:h-14 sm:w-14 lg:h-16 lg:w-16 rounded-full object-cover" />
             </Link>
             
             {/* Texts */}
             <div className="flex flex-col justify-center flex-1 min-w-0 pr-2">
               <h1 className="text-seppa-blue font-bold text-[11px] sm:text-sm md:text-base lg:text-lg leading-tight truncate">
-                {isZh ? 'FCEAC - 印度台灣文化交流協會' : 'FCEAC - Formosa Culture & Exchange Association Chennai'}
+                {isZh ? 'FCIEAC - 印度台灣文化資訊交流協會' : 'FCIEAC - Formosa Cultural & Information Exchange Association Chennai'}
               </h1>
               <p className="text-orange-500 font-medium text-[8px] sm:text-[10px] md:text-xs lg:text-sm leading-tight truncate mt-0.5 hidden sm:block">
                 {isZh ? 'COMMERCIAL EXCHANGE ASSOCIATION OF INDIA | 印度商业交换协会' : 'The Official Business Bridge Promoting Trade and Cultural Exchange'}
@@ -94,16 +94,16 @@ const Header: React.FC<HeaderProps> = ({ globalData, navigationData }) => {
         </div>
 
         {/* NAVIGATION BAR (Blue Section) - Hidden on Mobile */}
-        <header className="hidden md:flex w-full bg-seppa-blue border-t border-white/10 px-4 lg:px-8 h-12 lg:h-14 relative z-10">
+        <header className="hidden md:flex w-full bg-seppa-blue border-t border-white/10 px-2 sm:px-4 lg:px-6 xl:px-8 h-12 lg:h-14 relative z-10">
           <div className="w-full flex justify-between items-center max-w-[1700px] mx-auto h-full">
-            <nav className="flex-1 flex justify-start items-center h-full">
+            <nav className="flex-1 flex justify-start items-center h-full min-w-0">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
                 return link.children && link.children.length > 0 ? (
-                  <div key={link.href} className={`relative group h-full flex items-center px-2 lg:px-4 transition-colors ${isActive ? 'bg-[#1b8c4c]' : 'hover:bg-white/10'}`}>
+                  <div key={link.href} className={`relative group h-full flex items-center px-1.5 md:px-2 lg:px-2.5 xl:px-3.5 2xl:px-4 transition-colors shrink-0 ${isActive ? 'bg-[#1b8c4c]' : 'hover:bg-white/10'}`}>
                     <div className="cursor-pointer h-full flex items-center">
-                      <Link href={link.href} className="font-medium text-xs lg:text-sm 2xl:text-base flex items-center gap-1 text-white h-full whitespace-nowrap">
-                        {link.name} <FiChevronDown className="text-sm opacity-70 ml-0.5" />
+                      <Link href={link.href} className="font-medium text-[11px] md:text-xs lg:text-[13px] xl:text-sm 2xl:text-base flex items-center gap-1 text-white h-full whitespace-nowrap">
+                        {link.name} <FiChevronDown className="text-xs lg:text-sm opacity-70 ml-0.5" />
                       </Link>
                     </div>
                     <div className="absolute top-full left-0 mt-0 w-56 bg-seppa-blue text-white shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 flex flex-col py-2 border-t border-[#1b8c4c]">
@@ -115,7 +115,7 @@ const Header: React.FC<HeaderProps> = ({ globalData, navigationData }) => {
                     </div>
                   </div>
                 ) : (
-                  <Link key={link.href} href={link.href} className={`font-medium text-xs lg:text-sm 2xl:text-base flex items-center h-full px-2 lg:px-4 transition-colors whitespace-nowrap ${isActive ? 'bg-[#1b8c4c] text-white' : 'text-white hover:bg-white/10'}`}>
+                  <Link key={link.href} href={link.href} className={`font-medium text-[11px] md:text-xs lg:text-[13px] xl:text-sm 2xl:text-base flex items-center h-full px-1.5 md:px-2 lg:px-2.5 xl:px-3.5 2xl:px-4 transition-colors whitespace-nowrap shrink-0 ${isActive ? 'bg-[#1b8c4c] text-white' : 'text-white hover:bg-white/10'}`}>
                     {link.name}
                   </Link>
                 );
@@ -125,7 +125,7 @@ const Header: React.FC<HeaderProps> = ({ globalData, navigationData }) => {
             <div className="flex justify-end items-center gap-2 md:gap-4 group cursor-pointer ml-auto pl-2 shrink-0">
               <Link
                 href={ctaHref}
-                className="px-4 lg:px-5 2xl:px-6 py-2 2xl:py-3 rounded-full font-bold transition duration-300 bg-seppa-blue text-white hover:bg-seppa-red tracking-wide text-[13px] lg:text-sm 2xl:text-base flex items-center justify-center whitespace-nowrap"
+                className="px-3 lg:px-4 xl:px-5 2xl:px-6 py-1.5 lg:py-2 rounded-full font-bold transition duration-300 bg-seppa-blue text-white hover:bg-seppa-red tracking-wide text-xs lg:text-[13px] xl:text-sm 2xl:text-base flex items-center justify-center whitespace-nowrap"
               >
                 {ctaLabel}
               </Link>

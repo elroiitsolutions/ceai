@@ -26,7 +26,7 @@ export default function StrapiImage({ media, fallback, className, alt, ...props 
   return (
     <img
       src={imageUrl}
-      alt={alt || media?.alternativeText || "FCIEA Image"}
+      alt={alt || media?.alternativeText || "FCIEAC Image"}
       className={className}
       width={media?.width || props.width}
       height={media?.height || props.height}

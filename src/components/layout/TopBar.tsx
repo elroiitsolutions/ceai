@@ -28,7 +28,7 @@ const TopBar: React.FC<TopBarProps> = ({ globalData }) => {
             {isZh ? 'FCIEAC 印度台灣文化資訊交流協會' : 'FCIEAC - Formosa Cultural & Information Exchange Association Chennai'}
           </h1>
           <p className="text-orange-500 font-medium text-[10px] md:text-xs lg:text-sm leading-tight md:leading-tight mt-0.5">
-            {isZh ? 'COMMERCIAL EXCHANGE ASSOCIATION OF INDIA | 印度商业交换协会' : 'The Official Business Bridge Promoting Trade and Cultural Exchange'}
+            {isZh ? 'Formosa Cultural & Information Exchange Association Chennai | 印度商業交換協會' : 'The Official Business Bridge Promoting Trade and Cultural Exchange'}
           </p>
         </div>
 

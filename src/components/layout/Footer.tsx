@@ -20,9 +20,9 @@ const Footer: React.FC<FooterProps> = ({ globalData, footerData }) => {
   const tFooter = useTranslations('Footer');
 
   // const logoUrl = globalData?.footerLogo?.url || globalData?.headerLogo?.url || logoImg.src;
-  const siteName = globalData?.siteName || "FCIEA";
+  const siteName = globalData?.siteName || "FCIEAC";
   
-  const headline = footerData?.headline || "FCIEA (Formosa Culture and Information Exchange Association Chennai) is dedicated to promoting bilateral trade, investment, cultural, and technological cooperation. We are your most trusted partner in expanding into India-Taiwan markets.";
+  const headline = footerData?.headline || "FCIEAC (Formosa Cultural & Information Exchange Association Chennai) is dedicated to promoting bilateral trade, investment, cultural, and technological cooperation. We are your most trusted partner in expanding into India-Taiwan markets.";
   
   const column1Title = footerData?.column1Title || "QUICK LINKS";
   const column1Links = footerData?.column1Links || [
@@ -38,7 +38,7 @@ const Footer: React.FC<FooterProps> = ({ globalData, footerData }) => {
   const phone = footerData?.phone || "+886-2-1234-5678";
   const email = footerData?.email || "info@fciea.org";
   const address = footerData?.address || "9F, No. 223, Zhonghua 1st Rd., Gushan Dist., Kaohsiung City 804, Taiwan";
-  const copyright = footerData?.copyright || `© ${new Date().getFullYear()} FCEAC - Formosa Culture & Exchange Association Chennai. All Rights Reserved.`;
+  const copyright = footerData?.copyright || `© ${new Date().getFullYear()} FCIEAC - Formosa Cultural & Information Exchange Association Chennai. All Rights Reserved.`;
   const socialLinks = footerData?.socialLinks || [];
 
   return (
@@ -53,7 +53,7 @@ const Footer: React.FC<FooterProps> = ({ globalData, footerData }) => {
           <div className="md:col-span-5">
             <Link href="/" className="inline-block mb-6">
               <img 
-                src="/fceacfinal.png" 
+                src="/fcieac.png" 
                 alt={`${siteName} Logo`} 
                 className="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover shadow-md hover:scale-105 transition-transform duration-300" 
               />

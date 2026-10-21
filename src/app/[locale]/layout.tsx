@@ -9,12 +9,12 @@ import { routing } from '../../i18n/routing';
 import { fetchAPI } from '@/lib/api';
 
 export const metadata: Metadata = {
-  title: "FCEAC - Formosa Culture & Exchange Association Chennai",
-  description: "FCEAC",
+  title: "FCIEAC - Formosa Cultural & Information Exchange Association Chennai",
+  description: "FCIEAC",
   icons: {
-    icon: "/fceacfinal.png",
-    shortcut: "/fceacfinal.png",
-    apple: "/fceacfinal.png",
+    icon: "/fcieac.png",
+    shortcut: "/fcieac.png",
+    apple: "/fcieac.png",
   },
 };
 
@@ -47,9 +47,9 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/fceacfinal.png?v=2" type="image/png" />
-        <link rel="shortcut icon" href="/fceacfinal.png?v=2" type="image/png" />
-        <link rel="apple-touch-icon" href="/fceacfinal.png?v=2" />
+        <link rel="icon" href="/fcieac.png?v=3" type="image/png" />
+        <link rel="shortcut icon" href="/fcieac.png?v=3" type="image/png" />
+        <link rel="apple-touch-icon" href="/fcieac.png?v=3" />
       </head>
       <body suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>

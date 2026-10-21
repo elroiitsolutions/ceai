@@ -11,8 +11,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const seo = seoData?.data?.attributes || seoData?.data;
   
   return {
-    title: seo?.metaTitle ? `ESG - ${seo.metaTitle}` : "ESG (Environmental, Social, Governance) - FCIEA",
-    description: seo?.metaDescription || "FCIEA ESG Page",
+    title: seo?.metaTitle ? `ESG - ${seo.metaTitle}` : "ESG (Environmental, Social, Governance) - FCIEAC",
+    description: seo?.metaDescription || "FCIEAC ESG Page",
   };
 }
 

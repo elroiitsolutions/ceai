@@ -19,13 +19,13 @@ const TopBar: React.FC<TopBarProps> = ({ globalData }) => {
       <div className="flex items-center gap-3 lg:gap-4 max-w-[1700px] mx-auto w-full">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0 flex items-center">
-          <img src="/fceacfinal.png" alt={globalData?.siteName || "FCEAC Logo"} className="h-12 w-12 sm:h-14 sm:w-14 lg:h-16 lg:w-16 rounded-full object-cover" />
+          <img src="/fcieac.png" alt={globalData?.siteName || "FCIEAC Logo"} className="h-12 w-12 sm:h-14 sm:w-14 lg:h-16 lg:w-16 rounded-full object-cover" />
         </Link>
         
         {/* Texts */}
         <div className="flex flex-col justify-center">
           <h1 className="text-seppa-blue font-bold text-sm md:text-base lg:text-lg leading-tight md:leading-tight">
-            {isZh ? 'FCEAC 印度台灣文化交流協會' : 'FCEAC - Formosa Culture & Exchange Association Chennai'}
+            {isZh ? 'FCIEAC 印度台灣文化資訊交流協會' : 'FCIEAC - Formosa Cultural & Information Exchange Association Chennai'}
           </h1>
           <p className="text-orange-500 font-medium text-[10px] md:text-xs lg:text-sm leading-tight md:leading-tight mt-0.5">
             {isZh ? 'COMMERCIAL EXCHANGE ASSOCIATION OF INDIA | 印度商业交换协会' : 'The Official Business Bridge Promoting Trade and Cultural Exchange'}

@@ -2,8 +2,6 @@ import { setRequestLocale } from 'next-intl/server';
 import React from 'react';
 import HydrogenBusView from './HydrogenBusView';
 
-export const dynamic = 'force-static';
-
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -29,4 +27,3 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 export function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'zh' }];
 }
-

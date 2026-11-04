@@ -3,7 +3,7 @@ import React from 'react';
 import PageHeader from '@/components/layout/PageHeader';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import { FiPhoneCall, FiMail, FiMapPin } from 'react-icons/fi';
+import { FiPhoneCall, FiMail, FiMapPin, FiCheckCircle, FiAlertCircle, FiLoader } from 'react-icons/fi';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -22,6 +22,60 @@ interface ContactViewProps {
 const ContactUs: React.FC<ContactViewProps> = ({ data }) => {
   const t = useTranslations('Navigation');
   const tContact = useTranslations('ContactPage');
+
+  const [formData, setFormData] = React.useState({
+    name: '',
+    email: '',
+    phone: '',
+    location: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [status, setStatus] = React.useState<'idle' | 'success' | 'error'>('idle');
+  const [errorText, setErrorText] = React.useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setStatus('idle');
+    setErrorText('');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.error || 'Failed to submit inquiry');
+      }
+
+      setStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        location: '',
+        message: ''
+      });
+    } catch (err: any) {
+      console.error('Contact form submission error:', err);
+      setStatus('error');
+      setErrorText(err.message || tContact('errorMessage'));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // Taiwan Headquarters (from CMS or fallback defaults)
   const phone = data?.phone || "+886-2-1234-5678";
@@ -140,7 +194,7 @@ const ContactUs: React.FC<ContactViewProps> = ({ data }) => {
               </motion.div>
 
               {/* India Office details */}
-              <motion.div variants={fadeInUp} className="space-y-4">
+              {/* <motion.div variants={fadeInUp} className="space-y-4">
                 <h3 className="text-xl font-bold font-heading text-seppa-blue border-b border-gray-200 pb-2">
                   Corporate Office
                 </h3>
@@ -174,7 +228,7 @@ const ContactUs: React.FC<ContactViewProps> = ({ data }) => {
                     <p className="text-gray-700 text-sm md:text-base">{indiaEmail}</p>
                   </div>
                 </a>
-              </motion.div>
+              </motion.div> */}
             </motion.div>
               
             {/* Contact Form (Right Column) */}
@@ -190,58 +244,106 @@ const ContactUs: React.FC<ContactViewProps> = ({ data }) => {
                 
                 <div className="relative z-10">
                   <h3 className="text-2xl md:text-3xl font-bold font-heading text-white mb-6 md:mb-8">{tContact('sendMessage')}</h3>
-                  <form className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <input 
-                          type="text" 
-                          placeholder={tContact('yourName')}
-                          required
-                          className="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-seppa-red transition backdrop-blur-sm" 
-                        />
-                      </div>
-                      <div>
-                        <input 
-                          type="email" 
-                          placeholder={tContact('emailAddress')}
-                          required
-                          className="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-seppa-red transition backdrop-blur-sm" 
-                        />
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <input 
-                          type="tel" 
-                          placeholder={tContact('phoneNumber')}
-                          required
-                          className="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-seppa-red transition backdrop-blur-sm" 
-                        />
-                      </div>
-                      <div>
-                        <input 
-                          type="text" 
-                          placeholder={tContact('location')}
-                          required
-                          className="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-seppa-red transition backdrop-blur-sm" 
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <textarea 
-                        rows={5} 
-                        required
-                        placeholder={tContact('writeMessage')}
-                        className="w-full px-6 py-4 rounded-3xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-seppa-red transition resize-none backdrop-blur-sm"
-                      ></textarea>
-                    </div>
-                    <button 
-                      type="submit" 
-                      className="bg-seppa-red text-white px-10 py-4 rounded-full font-bold hover:bg-white hover:text-seppa-red transition duration-300 w-full md:w-auto shadow-lg"
+                  
+                  {status === 'success' ? (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-8 md:p-10 text-center bg-white/10 rounded-3xl border border-white/20 backdrop-blur-md space-y-5"
                     >
-                      {tContact('submitMessage')}
-                    </button>
-                  </form>
+                      <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center text-3xl mx-auto shadow-inner border border-emerald-400/30">
+                        <FiCheckCircle />
+                      </div>
+                      <h4 className="text-2xl font-bold text-white">{tContact('successTitle')}</h4>
+                      <p className="text-gray-200 text-sm md:text-base max-w-md mx-auto leading-relaxed">
+                        {tContact('successMessage')}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => setStatus('idle')}
+                        className="mt-2 inline-flex items-center gap-2 px-8 py-3 rounded-full bg-white text-seppa-blue hover:bg-seppa-red hover:text-white text-sm font-bold transition duration-300 shadow-md"
+                      >
+                        Send another message
+                      </button>
+                    </motion.div>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      {status === 'error' && (
+                        <div className="flex items-center gap-3 p-4 bg-red-500/20 border border-red-500/40 rounded-2xl text-red-200 text-sm backdrop-blur-sm">
+                          <FiAlertCircle className="text-xl shrink-0 text-red-400" />
+                          <span>{errorText || tContact('errorMessage')}</span>
+                        </div>
+                      )}
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <input 
+                            type="text" 
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder={tContact('yourName')}
+                            required
+                            className="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-seppa-red transition backdrop-blur-sm" 
+                          />
+                        </div>
+                        <div>
+                          <input 
+                            type="email" 
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder={tContact('emailAddress')}
+                            required
+                            className="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-seppa-red transition backdrop-blur-sm" 
+                          />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <input 
+                            type="tel" 
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            placeholder={tContact('phoneNumber')}
+                            required
+                            className="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-seppa-red transition backdrop-blur-sm" 
+                          />
+                        </div>
+                        <div>
+                          <input 
+                            type="text" 
+                            name="location"
+                            value={formData.location}
+                            onChange={handleChange}
+                            placeholder={tContact('location')}
+                            required
+                            className="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-seppa-red transition backdrop-blur-sm" 
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <textarea 
+                          rows={5} 
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          required
+                          placeholder={tContact('writeMessage')}
+                          className="w-full px-6 py-4 rounded-3xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-seppa-red transition resize-none backdrop-blur-sm"
+                        ></textarea>
+                      </div>
+                      <button 
+                        type="submit" 
+                        disabled={isSubmitting}
+                        className="bg-seppa-red text-white px-10 py-4 rounded-full font-bold hover:bg-white hover:text-seppa-red transition duration-300 w-full md:w-auto shadow-lg disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      >
+                        {isSubmitting && <FiLoader className="animate-spin text-lg" />}
+                        {isSubmitting ? tContact('submitting') : tContact('submitMessage')}
+                      </button>
+                    </form>
+                  )}
                 </div>
               </div>
             </motion.div>

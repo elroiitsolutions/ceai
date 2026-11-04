@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, usePathname } from '@/i18n/routing';
 import { FiMenu, FiX, FiChevronDown } from 'react-icons/fi';
+import { FaBus } from 'react-icons/fa';
 import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
@@ -122,7 +123,16 @@ const Header: React.FC<HeaderProps> = ({ globalData, navigationData }) => {
               })}
             </nav>
 
-            <div className="flex justify-end items-center gap-2 md:gap-4 group cursor-pointer ml-auto pl-2 shrink-0">
+            <div className="flex justify-end items-center gap-2 md:gap-3 ml-auto pl-2 shrink-0">
+              {/* Bus Icon with White Background between ESG and Contact Us */}
+              <Link
+                href="/hydrogen-bus"
+                title={isZh ? "氫谷動能 - 氫能燃料電池公車" : "Hydrogen Valley Power - Green Mobility Bus"}
+                className={`w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 rounded-full bg-white text-seppa-blue hover:text-white hover:bg-emerald-600 flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 shrink-0 ${pathname === '/hydrogen-bus' ? 'ring-2 ring-emerald-400 bg-emerald-50' : ''}`}
+                aria-label="Hydrogen Bus Brochure"
+              >
+                <FaBus className="text-xs sm:text-sm lg:text-base" />
+              </Link>
               <Link
                 href={ctaHref}
                 className="px-3 lg:px-4 xl:px-5 2xl:px-6 py-1.5 lg:py-2 rounded-full font-bold transition duration-300 bg-seppa-blue text-white hover:bg-seppa-red tracking-wide text-xs lg:text-[13px] xl:text-sm 2xl:text-base flex items-center justify-center whitespace-nowrap"
@@ -166,6 +176,18 @@ const Header: React.FC<HeaderProps> = ({ globalData, navigationData }) => {
               )
             ))}
             
+            {/* Mobile Bus Icon Link */}
+            <Link 
+              href="/hydrogen-bus" 
+              className="flex items-center gap-3 text-white font-medium font-heading hover:text-emerald-400 transition border-b border-white/10 pb-2" 
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <span className="w-8 h-8 rounded-full bg-white text-seppa-blue flex items-center justify-center shadow-sm shrink-0">
+                <FaBus className="text-sm" />
+              </span>
+              <span>{isZh ? '氫能綠色出行 (氫谷動能)' : 'Hydrogen Green Mobility Bus'}</span>
+            </Link>
+
             <div className="pt-6 mt-auto">
               <Link href={ctaHref} className="bg-seppa-red text-white px-6 py-4 rounded-full font-medium hover:bg-white hover:text-seppa-blue transition flex items-center justify-center gap-2 w-full text-center shadow-md" onClick={() => setIsMobileMenuOpen(false)}>
                 {ctaLabel}

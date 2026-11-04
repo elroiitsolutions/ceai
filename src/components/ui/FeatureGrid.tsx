@@ -55,6 +55,11 @@ export default function FeatureGrid({ data }: FeatureGridProps) {
   const t = useTranslations('Navigation');
   const { title, badge, description, columns = "3", cards = [] } = data || {};
 
+  const isChennaiOffice = 
+    title?.toLowerCase().includes('chennai') || 
+    badge?.includes('辦事處') || 
+    description?.toLowerCase().includes('chennai');
+
   // Determine grid columns class based on the selected prop
   let gridColsClass = "grid-cols-1 md:grid-cols-3";
   if (columns === "2") {
@@ -68,27 +73,65 @@ export default function FeatureGrid({ data }: FeatureGridProps) {
       <div className="container mx-auto px-4 lg:px-8 max-w-7xl relative z-10">
         
         {/* Section Header */}
-        {(title || badge || description) && (
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            {badge && (
-              <span className="inline-block py-1 px-3 rounded-full bg-seppa-red/10 text-seppa-red text-sm font-bold tracking-wider uppercase mb-4">
-                {badge}
-              </span>
-            )}
-            {title && (
-              <h2 className="text-3xl md:text-4xl font-bold font-heading text-seppa-blue mb-4">
-                {title}
-              </h2>
-            )}
-            {title && (
-               <div className="h-1 w-16 bg-seppa-red mx-auto rounded-full mb-6"></div>
-            )}
-            {description && (
-              <p className="text-lg text-slate-600 leading-relaxed font-light">
-                {description}
-              </p>
-            )}
+        {isChennaiOffice ? (
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-14 mb-16">
+            {/* Start / Left: Heading, Badge & Description aligned to start */}
+            <div className="w-full lg:w-7/12 text-left flex flex-col items-start">
+              {badge && (
+                <span className="inline-block py-1.5 px-4 rounded-full bg-seppa-red/10 text-seppa-red text-xs sm:text-sm font-bold tracking-wider uppercase mb-4 shadow-sm">
+                  {badge}
+                </span>
+              )}
+              {title && (
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-heading text-seppa-blue mb-4 leading-tight">
+                  {title}
+                </h2>
+              )}
+              {title && (
+                <div className="h-1.5 w-20 bg-seppa-red rounded-full mb-6"></div>
+              )}
+              {description && (
+                <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-light">
+                  {description}
+                </p>
+              )}
+            </div>
+
+            {/* End / Right: India-Taiwan Commercial Exchange Association Chennai Office Building */}
+            <div className="w-full lg:w-5/12 flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-md lg:max-w-none rounded-3xl overflow-hidden shadow-2xl border-4 border-white group">
+                <img
+                  src="/images/chennai-office-building.jpg"
+                  alt="India - Taiwan Commercial Exchange Association Chennai Office"
+                  className="w-full h-72 sm:h-80 lg:h-96 object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </div>
           </div>
+        ) : (
+          (title || badge || description) && (
+            <div className="text-center mb-16 max-w-3xl mx-auto">
+              {badge && (
+                <span className="inline-block py-1 px-3 rounded-full bg-seppa-red/10 text-seppa-red text-sm font-bold tracking-wider uppercase mb-4">
+                  {badge}
+                </span>
+              )}
+              {title && (
+                <h2 className="text-3xl md:text-4xl font-bold font-heading text-seppa-blue mb-4">
+                  {title}
+                </h2>
+              )}
+              {title && (
+                 <div className="h-1 w-16 bg-seppa-red mx-auto rounded-full mb-6"></div>
+              )}
+              {description && (
+                <p className="text-lg text-slate-600 leading-relaxed font-light">
+                  {description}
+                </p>
+              )}
+            </div>
+          )
         )}
 
         {/* Grid Cards */}
